@@ -29,7 +29,7 @@ const UsersTable = ({ data: { items = [], total_count } }) => {
       dataIndex: 'login',
       key: 'login',
       width: 250,
-      render: (name, { html_url }) => <a target='_blank' href={html_url}>{name}</a>
+      render: (name, { html_url }) => <a rel='noreferrer' target='_blank' href={html_url}>{name}</a>
     },
     {
       title: 'Type',

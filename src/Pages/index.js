@@ -24,7 +24,9 @@ const GithubSearch = () => {
 
   useEffect(() => {
     values?.searchQuery?.trim() && getUsers();
-  }, [values.filters])
+    // eslint-disable-next-line
+  }, [values.filters]);
+  
 
   const getUsers = async () => {
     setValues({ ...values, loading: true });
