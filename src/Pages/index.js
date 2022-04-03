@@ -1,13 +1,13 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Spin, notification } from "antd";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Spin, notification } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-import Footer from "../components/Footer";
-import SearchBar from "../components/SearchBar";
-import UsersTable from "../components/UsersTable";
-import { GITHUB_PUBLIC_API_BASE_URL } from "../constants";
-import UserDetailsModal from "../components/UserDetailsModal";
+import Footer from '../components/Footer';
+import SearchBar from '../components/SearchBar';
+import UsersTable from '../components/UsersTable';
+import { GITHUB_PUBLIC_API_BASE_URL } from '../constants';
+import UserDetailsModal from '../components/UserDetailsModal';
 
 const spinner = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 

@@ -1,4 +1,4 @@
-import { Pagination, Select } from "antd";
+import { Pagination, Select } from 'antd';
 const { Option } = Select;
 
 const Footer = ({ values, setValues }) => {

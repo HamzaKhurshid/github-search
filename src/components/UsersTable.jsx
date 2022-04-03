@@ -1,4 +1,4 @@
-import { Table, Tag, Avatar, Tooltip, Button, notification } from "antd";
+import { Table, Tag, Avatar, Tooltip, Button, notification } from 'antd';
 import { UserOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
 const UsersTable = ({ getUser, data: { items = [], total_count }, setValues, values }) => {

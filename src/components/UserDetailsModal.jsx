@@ -1,4 +1,4 @@
-import { Avatar, Modal, Row, Col } from "antd";
+import { Avatar, Modal, Row, Col } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 const UserDetailsModal = ({ setValues, values }) => {
