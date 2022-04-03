@@ -1,5 +1,5 @@
-import { Button, Col, Input, Row } from "antd";
-import { LoadingOutlined } from '@ant-design/icons';
+import { Button, Col, Input, Row, Tooltip } from "antd";
+import { LoadingOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
 const SearchBar = ({ values, setValues }) => {
   const { searchQuery, loading, errorMessage } = values;
@@ -14,32 +14,53 @@ const SearchBar = ({ values, setValues }) => {
             value={searchQuery}
             disabled={loading}
             onChange={({ target }) => {
-              setValues({ 
-                ...values, 
+              setValues({
+                ...values,
                 searchQuery: target.value,
                 errorMessage: ''
               });
             }}
-            size='large' 
             placeholder='Search users'
           />
           {<h5 style={{ color: 'red' }}>{errorMessage}</h5>}
         </Col>
         <Col>
-          <Button 
-            disabled={loading} 
+          <Button
+            disabled={loading}
             onClick={() => {
-              setValues({ 
-                ...values, 
+              setValues({
+                ...values,
                 filters: { ...values.filters, pageNumber: 1 },
                 ...(!values.searchQuery.trim() ? { errorMessage: 'Please provide a valid query' } : {})
               });
-            }} 
-            size='large' 
+            }}
             type='primary'
           >
             Search
           </Button>
+          <Tooltip placement='right' title='Clear all data'>
+            <Button
+              style={{ marginLeft: 10 }}
+              disabled={loading}
+              onClick={() => {
+                setValues({
+                  filters: {
+                    itemsPerPage: 30,
+                    pageNumber: 1,
+                  },
+                  searchQuery: '',
+                  data: [],
+                  loading: false,
+                  errorMessage: '',
+                  isModalVisible: false,
+                  userDetails: {}
+                });
+              }}
+              icon={<ExclamationCircleOutlined />}
+              type='danger'
+            >
+            </Button>
+          </Tooltip>
         </Col>
       </Row>
     </div>

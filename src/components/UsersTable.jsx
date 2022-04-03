@@ -67,7 +67,7 @@ const UsersTable = ({ getUser, data: { items = [], total_count }, setValues, val
   return (
     <div style={{ marginTop: 30, height: 'calc(100% - 47px)' }}>
       <div style={{ marginBottom: 10 }}>
-        <b>{total_count >= 1 ? total_count?.toLocaleString() : 0} {total_count === 1 ? 'entry' : 'entries'}</b>
+        <b>{total_count >= 1 ? total_count?.toLocaleString() : 0} total {total_count === 1 ? 'entry' : 'entries'}</b>
       </div>
       <Table
         style={{ boxShadow: '0 8px 8px -4px grey', border: '2px solid #D8D8D8', borderRadius: '3px' }}
