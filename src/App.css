@@ -1,1 +1,23 @@
 @import '~antd/dist/antd.css';
+
+.ant-spin-nested-loading {
+  height: 100%;
+}
+
+.ant-spin-container {
+  height: 100%;
+}
+
+.ant-table-wrapper {
+  max-height: calc(100% - 32px);
+  overflow-y: scroll;
+  height: calc(100% - 32px);
+}
+
+.ant-table-row.ant-table-row-level-0 {
+  background-color: white;
+}
+
+.ant-table.ant-table-small {
+  height: 100%;
+}

@@ -7,7 +7,7 @@ const SearchBar = ({ values, setValues }) => {
   return (
     <div>
       <Row gutter={20} justify='center'>
-        <Col style={{ width: '700px' }}>
+        <Col style={{ width: '500px' }}>
           <Input
             status={errorMessage ? 'error' : ''}
             suffix={loading && <LoadingOutlined />}

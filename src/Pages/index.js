@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 import UsersTable from "../components/UsersTable";
 import { GITHUB_PUBLIC_API_BASE_URL } from "../constants";
+import UserDetailsModal from "../components/UserDetailsModal";
 
 const spinner = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -19,7 +20,9 @@ const GithubSearch = () => {
     searchQuery: '',
     data: [],
     loading: false,
-    errorMessage: ''
+    errorMessage: '',
+    isModalVisible: false,
+    userDetails: {}
   });
 
   useEffect(() => {
@@ -28,10 +31,40 @@ const GithubSearch = () => {
   }, [values.filters]);
   
 
+  const getUser = async (userDetailsApiUrl) => {
+    try {
+      setValues({
+        ...values,
+        loading: true
+      });
+      const { data: userDetails } = await axios.get(userDetailsApiUrl) || {};
+      setValues({
+        ...values,
+        userDetails,
+        isModalVisible: true,
+        loading: false
+      });
+    } catch (error) {
+      setValues({
+        ...values,
+        userDetails: {},
+        isModalVisible: false,
+        loading: false
+      });
+
+      notification.open({
+        duration: 5,
+        message: 's',
+        type: 'error',
+        description: error?.message || 'User details could not be fetched'
+      });
+    }
+  };
+
   const getUsers = async () => {
     setValues({ ...values, loading: true });
     try {
-      const { data } = await axios.get(`${GITHUB_PUBLIC_API_BASE_URL}/users`, {
+      const { data } = await axios.get(`${GITHUB_PUBLIC_API_BASE_URL}/search/users`, {
         params: {
           q: values.searchQuery.trim(),
           per_page: values.filters.itemsPerPage,
@@ -60,14 +93,17 @@ const GithubSearch = () => {
   };
 
   return (
-    <div style={{ padding: 40, backgroundColor: '#E5E9F2', height: '100%' }}>
+    <div style={{ padding: '40px 40px 20px 40px', height: '100%', backgroundColor: '#F2F2F2' }}>
       <SearchBar setValues={setValues} values={values} />
       {
-        <Spin spinning={values.loading} indicator={spinner}>
-          <UsersTable data={values.data} />
-          <Footer setValues={setValues} values={values} />
-        </Spin>
+        <div style={{ height: 'calc(100% - 45.95px - 30px)' }}>
+          <Spin spinning={values.loading} indicator={spinner}>
+            <UsersTable getUser={getUser} data={values.data} setValues={setValues} values={values} />
+            <Footer setValues={setValues} values={values} />
+          </Spin>
+        </div>
       }
+      <UserDetailsModal setValues={setValues} values={values} />
     </div>
   );
 }

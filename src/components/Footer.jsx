@@ -4,6 +4,9 @@ import { RightOutlined, LeftOutlined } from '@ant-design/icons';
 const { Option } = Select;
 
 const Footer = ({ values, setValues }) => {
+  const { data: { items } = {} } = values || {};
+  const isDataPresent = items && items.length ? true : false;
+
   const onPageNumberChange = (mode) => {
     let pageNumber = values.filters.pageNumber;
     mode === 'next' ? pageNumber += 1 : pageNumber -= 1;
@@ -25,7 +28,9 @@ const Footer = ({ values, setValues }) => {
       </Select>
       
       <div style={{ display: 'flex' }}>
-        <Button 
+        <Button
+          disabled={!isDataPresent}
+          type='primary'
           style={{ marginLeft: 15 }} 
           shape="circle" 
           onClick={() => onPageNumberChange('prev')}
@@ -36,7 +41,9 @@ const Footer = ({ values, setValues }) => {
             <h3>{values.filters.pageNumber}</h3>
           </Tooltip>
         </div>
-        <Button 
+        <Button
+          disabled={!isDataPresent}
+          type='primary'
           shape="circle" 
           onClick={() => onPageNumberChange('next')}
           icon={<RightOutlined />} 
