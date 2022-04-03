@@ -1,23 +1,27 @@
 import { Table, Tag, Avatar, Tooltip, Button, notification } from 'antd';
 import { UserOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
-const UsersTable = ({ getUser, data: { items = [], total_count }, setValues, values }) => {
-  const dataSource = items.map(({ url, avatar_url, login, type, html_url }, index) => {
-    return {
-      key: index + 1,
-      login,
-      type,
-      avatar_url,
-      html_url,
-      userDetailsApiUrl: url
-    };
-  });
+const UsersTable = ({ getUser, values: { data: { items = [], total_count } } }) => {
+  const dataSource = items.map(({
+    url: userDetailsApiUrl,
+    avatar_url: avatarUrl,
+    login: username,
+    type,
+    html_url: githubProfileLink
+  }, key) => ({
+    key,
+    username,
+    type,
+    avatarUrl,
+    githubProfileLink,
+    userDetailsApiUrl
+  }));
 
   const columns = [
     {
       title: '',
-      dataIndex: 'avatar_url',
-      key: 'avatar_url',
+      dataIndex: 'avatarUrl',
+      key: 'avatarUrl',
       width: 50,
       render: avatarUrl => (
         <Tooltip placement='right' title={<Avatar shape='square' size={140} icon={<UserOutlined />} src={avatarUrl} />}>
@@ -27,10 +31,10 @@ const UsersTable = ({ getUser, data: { items = [], total_count }, setValues, val
     },
     {
       title: 'Name',
-      dataIndex: 'login',
-      key: 'login',
+      dataIndex: 'username',
+      key: 'username',
       width: 250,
-      render: (name, { html_url }) => <a rel='noreferrer' target='_blank' href={html_url}>{name}</a>
+      render: (name, { githubProfileLink }) => <a rel='noreferrer' target='_blank' href={githubProfileLink}>{name}</a>
     },
     {
       title: 'Type',
@@ -44,7 +48,7 @@ const UsersTable = ({ getUser, data: { items = [], total_count }, setValues, val
       fixed: 'right',
       width: 100,
       render: (value, { userDetailsApiUrl }) => (
-        <Button 
+        <Button
           onClick={() => {
             if (userDetailsApiUrl) {
               getUser(userDetailsApiUrl);
@@ -55,11 +59,11 @@ const UsersTable = ({ getUser, data: { items = [], total_count }, setValues, val
                 description: 'API url for fetching user details is not valid!'
               });
             }
-          }} 
-          icon={<ExclamationCircleOutlined />} 
+          }}
+          icon={<ExclamationCircleOutlined />}
           size='small'>
-            View Complete details
-          </Button>
+          View Complete details
+        </Button>
       )
     }
   ];

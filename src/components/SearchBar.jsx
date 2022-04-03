@@ -22,11 +22,12 @@ const SearchBar = ({ values, setValues }) => {
             }}
             placeholder='Search users'
           />
-          {<h5 style={{ color: 'red' }}>{errorMessage}</h5>}
+          {errorMessage ? <h5 style={{ color: 'red' }}>{errorMessage}</h5> : null}
         </Col>
         <Col>
           <Button
             disabled={loading}
+            type='primary'
             onClick={() => {
               setValues({
                 ...values,
@@ -34,13 +35,14 @@ const SearchBar = ({ values, setValues }) => {
                 ...(!values.searchQuery.trim() ? { errorMessage: 'Please provide a valid query' } : {})
               });
             }}
-            type='primary'
           >
             Search
           </Button>
           <Tooltip placement='right' title='Clear all data'>
             <Button
               style={{ marginLeft: 10 }}
+              icon={<ExclamationCircleOutlined />}
+              type='danger'
               onClick={() => {
                 setValues({
                   filters: {
@@ -55,8 +57,6 @@ const SearchBar = ({ values, setValues }) => {
                   userDetails: {}
                 });
               }}
-              icon={<ExclamationCircleOutlined />}
-              type='danger'
             >
             </Button>
           </Tooltip>

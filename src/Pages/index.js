@@ -32,11 +32,8 @@ const GithubSearch = () => {
   
 
   const getUser = async (userDetailsApiUrl) => {
+    setValues({ ...values, loading: true });
     try {
-      setValues({
-        ...values,
-        loading: true
-      });
       const { data: userDetails } = await axios.get(userDetailsApiUrl) || {};
       setValues({
         ...values,
@@ -96,9 +93,9 @@ const GithubSearch = () => {
     <div style={{ padding: '40px 40px 20px 40px', height: '100%', backgroundColor: '#F2F2F2' }}>
       <SearchBar setValues={setValues} values={values} />
       {
-        <div style={{ height: `calc(100% - ${values.errorMessage ? '56.05px' : '37.8px'} - 30px)` }}>
+        <div style={{ height: `calc(100% - ${values.errorMessage ? '56.05px' : '32px'} - 30px)` }}>
           <Spin spinning={values.loading} indicator={spinner}>
-            <UsersTable getUser={getUser} data={values.data} setValues={setValues} values={values} />
+            <UsersTable getUser={getUser} setValues={setValues} values={values} />
             <Footer setValues={setValues} values={values} />
           </Spin>
         </div>

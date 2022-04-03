@@ -10,17 +10,17 @@ const Footer = ({ values, setValues }) => {
         <Pagination
           pageSize={values.filters.itemsPerPage}
           showSizeChanger={false}
+          current={values.filters.pageNumber}
+          total={total_count}
           onChange={(pageNumber) => {
             setValues({ ...values, filters: { ...values.filters, pageNumber } });
           }}
-          current={values.filters.pageNumber}
-          total={total_count}
         />
       </div>
 
-      <Select 
-        value={values.filters.itemsPerPage} 
-        style={{ width: 170 }} 
+      <Select
+        value={values.filters.itemsPerPage}
+        style={{ width: 170 }}
         onChange={(itemsPerPage) => {
           setValues({ ...values, filters: { ...values.filters, itemsPerPage, pageNumber: 1 } });
         }}
