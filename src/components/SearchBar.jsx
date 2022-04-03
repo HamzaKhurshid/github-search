@@ -41,7 +41,6 @@ const SearchBar = ({ values, setValues }) => {
           <Tooltip placement='right' title='Clear all data'>
             <Button
               style={{ marginLeft: 10 }}
-              disabled={loading}
               onClick={() => {
                 setValues({
                   filters: {
