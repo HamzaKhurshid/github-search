@@ -1,4 +1,4 @@
-import GithubSearch from "./Pages";
+import GithubSearch from "./pages";
 import './App.css';
 
 const App = () => {
