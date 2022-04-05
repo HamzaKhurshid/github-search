@@ -35,7 +35,7 @@ I have tried to write the code in most neat, clean and short way. One significan
 In this way, we don't need to call api function again and again on any filter change hence making code look more clean and short. It will also be helpful for future implementations when I need to further add sort or order filters on api call. (In this case I only need to add dependencies in my useEffect method).
 
 NOTE:
-Since github's search users api returns us a very few useful information of a user, thats why I am only showing username and user's type in table. For further complete information of user, i am using github's search user api which gets called when clicked on view complete details.
+Since github's search users api returns us few useful information regarding an user, thats why I am only showing username and user's type in table. For further complete information of an user, i am using github's search user api which gets called when clicked on view complete details.
 
 ## Future Improvements
 
